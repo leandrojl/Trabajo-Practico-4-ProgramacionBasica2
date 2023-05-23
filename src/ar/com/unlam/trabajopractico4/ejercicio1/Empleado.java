@@ -6,6 +6,7 @@ public class Empleado {
 
 	private String nombre;
 	private String apellido;
+	private Integer dni;
 	private Integer sueldo;
 	private LocalDate fechaDeNacimiento;
 

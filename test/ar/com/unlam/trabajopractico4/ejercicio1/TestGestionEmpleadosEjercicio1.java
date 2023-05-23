@@ -31,5 +31,71 @@ public class TestGestionEmpleadosEjercicio1 {
 		
 		Assert.assertTrue(empresa.getEmpleados().size() == 2);
 	}
+	
+	@Test
+	public void queUnaEmpresaTengaUnDepartamentoConEmpleadosYGerenteAsignado() {
+		Empresa empresa = new Empresa();
+		
+		Empleado empleado1 = new Empleado("Leandro", "Girafales", 30000, LocalDate.of(1990, 5, 15));
+		Empleado empleado2 = new Empleado("Juan", "Perez", 300000, LocalDate.of(1978, 5, 15));
+		
+		Gerente gerente = new Gerente("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		
+		Departamento departamentoRecursosHumanos = new Departamento("Recursos Humanos");
+		
+		empresa.agregarDepartamento(departamentoRecursosHumanos);
+		
+		departamentoRecursosHumanos.agregarEmpleado(empleado1);
+		departamentoRecursosHumanos.agregarEmpleado(empleado2);
+		departamentoRecursosHumanos.setGerente(gerente);
+		
+		Assert.assertTrue(empresa.getDepartamentos().contains(departamentoRecursosHumanos));
+		Assert.assertTrue(departamentoRecursosHumanos.getEmpleados().size() == 2);
+		Assert.assertEquals(gerente, departamentoRecursosHumanos.getGerente());
+		
+		
+	}
+	
+	@Test
+	public void queElGerenteTengaUnaCocheraParaGuardarSuVehiculo() {
+		Gerente gerente = new Gerente("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		
+		Vehiculo auto = new Vehiculo("Ford", "Fiesta", "AB312OL");
+		
+		gerente.asignarCochera(auto);
+		
+		Assert.assertEquals(auto, gerente.getCochera());
+		
+	}
+	
+	@Test
+	public void queUnEmpleadoDeTipoIngenieroTengaSuSalarioAfectadoPorUnConceptoDenominadoParaLaProductividad() {
+		Ingeniero ingeniero = new Ingeniero("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		
+		Integer conceptoParaLaProductividad = 20000;
+		
+		Integer valorEsperado = 320000;
+		
+		ingeniero.calcularSueldo(conceptoParaLaProductividad);
+		
+		Assert.assertEquals(valorEsperado, ingeniero.getSueldo());
+		
+	}
+	
+	@Test
+	public void queUnDirectorTengaCocheraYPoseaUnSueldoExtra() {
+		Director director = new Director("Jose", "Girafales", 500000, LocalDate.of(1960, 5, 15));
+		Vehiculo auto = new Vehiculo("Ford", "Fiesta", "AB312OL");
+		Integer sueldoExtra = 50000;
+		
+		Integer valorEsperado = 550000;
+		
+		director.calcularSueldo(sueldoExtra);
+		director.asignarVehiculo(auto);
+		
+		Assert.assertEquals(valorEsperado, director.getSueldo());
+		Assert.assertEquals(auto, director.getCochera());
+	}
+
 
 }
