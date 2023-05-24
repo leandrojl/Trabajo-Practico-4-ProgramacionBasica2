@@ -6,8 +6,8 @@ public class Gerente extends Empleado{
 	
 	private Vehiculo cochera;
 
-	public Gerente(String nombre, String apellido, Integer sueldo, LocalDate fechaDeNacimiento) {
-		super(nombre, apellido, sueldo, fechaDeNacimiento);
+	public Gerente(String nombre, String apellido, Integer dni, Integer sueldo, LocalDate fechaDeNacimiento) {
+		super(nombre, apellido, dni, sueldo, fechaDeNacimiento);
 		// TODO Auto-generated constructor stub
 	}
 	

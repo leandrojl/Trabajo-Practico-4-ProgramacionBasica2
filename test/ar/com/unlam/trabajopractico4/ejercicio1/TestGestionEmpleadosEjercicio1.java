@@ -9,22 +9,22 @@ import org.junit.Test;
 public class TestGestionEmpleadosEjercicio1 {
 
 	/*
-	 *  Se desea desarrollar un software para la gestión de los empleados de una empresa. Para
+	 *  Se desea desarrollar un software para la gestiï¿½n de los empleados de una empresa. Para
 		cada empleado se desea conocer el nombre, apellido, salario y fecha de nacimiento.
-		Como la empresa está organizada en forma de departamentos, también se debe conocer
+		Como la empresa estï¿½ organizada en forma de departamentos, tambiï¿½n se debe conocer
 		el gerente encargado de cada uno de ellos. Adicionalmente, los gerentes cuentan con la
-		posibilidad de tener una cochera en donde estacionar sus vehículos.
-		También se cuenta con un manejo especial para aquellos empleados de tipo “Ingenieros”,
-		dado que su salario base se ve afectado por un concepto adicional denominado “para la
-		productividad”.
-		Por último, se encuentran los directores quienes además de tener su cochera, poseen un
-		“sueldo extra” producto de tener la responsabilidad de ser directivo de la empresa. */
+		posibilidad de tener una cochera en donde estacionar sus vehï¿½culos.
+		Tambiï¿½n se cuenta con un manejo especial para aquellos empleados de tipo ï¿½Ingenierosï¿½,
+		dado que su salario base se ve afectado por un concepto adicional denominado ï¿½para la
+		productividadï¿½.
+		Por ï¿½ltimo, se encuentran los directores quienes ademï¿½s de tener su cochera, poseen un
+		ï¿½sueldo extraï¿½ producto de tener la responsabilidad de ser directivo de la empresa. */
 	
 	@Test
 	public void dadoQueTengoUnaEmpresaConEmpleados() {
 		Empresa empresa = new Empresa();
-		Empleado empleado1 = new Empleado("Leandro", "Girafales", 30000, LocalDate.of(1990, 5, 15));
-		Empleado empleado2 = new Empleado("Juan", "Perez", 300000, LocalDate.of(1978, 5, 15));
+		Empleado empleado1 = new Empleado("Leandro", "Girafales",12000000, 30000, LocalDate.of(1990, 5, 15));
+		Empleado empleado2 = new Empleado("Juan", "Perez", 13000000,300000, LocalDate.of(1978, 5, 15));
 		
 		empresa.agregarEmpleado(empleado1);
 		empresa.agregarEmpleado(empleado2);
@@ -36,10 +36,10 @@ public class TestGestionEmpleadosEjercicio1 {
 	public void queUnaEmpresaTengaUnDepartamentoConEmpleadosYGerenteAsignado() {
 		Empresa empresa = new Empresa();
 		
-		Empleado empleado1 = new Empleado("Leandro", "Girafales", 30000, LocalDate.of(1990, 5, 15));
-		Empleado empleado2 = new Empleado("Juan", "Perez", 300000, LocalDate.of(1978, 5, 15));
+		Empleado empleado1 = new Empleado("Leandro", "Girafales", 12000000,30000, LocalDate.of(1990, 5, 15));
+		Empleado empleado2 = new Empleado("Juan", "Perez", 13000000,300000, LocalDate.of(1978, 5, 15));
 		
-		Gerente gerente = new Gerente("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		Gerente gerente = new Gerente("Jose", "Girafales", 15000000,300000, LocalDate.of(1960, 5, 15));
 		
 		Departamento departamentoRecursosHumanos = new Departamento("Recursos Humanos");
 		
@@ -58,7 +58,7 @@ public class TestGestionEmpleadosEjercicio1 {
 	
 	@Test
 	public void queElGerenteTengaUnaCocheraParaGuardarSuVehiculo() {
-		Gerente gerente = new Gerente("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		Gerente gerente = new Gerente("Jose", "Girafales", 18000000, 300000, LocalDate.of(1960, 5, 15));
 		
 		Vehiculo auto = new Vehiculo("Ford", "Fiesta", "AB312OL");
 		
@@ -70,7 +70,7 @@ public class TestGestionEmpleadosEjercicio1 {
 	
 	@Test
 	public void queUnEmpleadoDeTipoIngenieroTengaSuSalarioAfectadoPorUnConceptoDenominadoParaLaProductividad() {
-		Ingeniero ingeniero = new Ingeniero("Jose", "Girafales", 300000, LocalDate.of(1960, 5, 15));
+		Ingeniero ingeniero = new Ingeniero("Jose", "Girafales", 18000000, 300000, LocalDate.of(1960, 5, 15));
 		
 		Integer conceptoParaLaProductividad = 20000;
 		
@@ -84,7 +84,7 @@ public class TestGestionEmpleadosEjercicio1 {
 	
 	@Test
 	public void queUnDirectorTengaCocheraYPoseaUnSueldoExtra() {
-		Director director = new Director("Jose", "Girafales", 500000, LocalDate.of(1960, 5, 15));
+		Director director = new Director("Jose", "Girafales", 20000000, 500000, LocalDate.of(1960, 5, 15));
 		Vehiculo auto = new Vehiculo("Ford", "Fiesta", "AB312OL");
 		Integer sueldoExtra = 50000;
 		
@@ -95,6 +95,24 @@ public class TestGestionEmpleadosEjercicio1 {
 		
 		Assert.assertEquals(valorEsperado, director.getSueldo());
 		Assert.assertEquals(auto, director.getCochera());
+	}
+	
+	@Test
+	public void queNoSePuedanAgregarDosEmpleadosConMismoDniAlDepartamento() {
+		
+		Empleado empleado1 = new Empleado("Leandro", "Girafales", 12000000,30000, LocalDate.of(1990, 5, 15));
+		Empleado empleado2 = new Empleado("Juan", "Perez", 12000000,300000, LocalDate.of(1978, 5, 15));
+		
+		Departamento departamentoRecursosHumanos = new Departamento("Recursos Humanos");
+		
+		
+		departamentoRecursosHumanos.agregarEmpleado(empleado1);
+		departamentoRecursosHumanos.agregarEmpleado(empleado2);
+
+
+		Assert.assertTrue(departamentoRecursosHumanos.getEmpleados().size()==1);
+		
+		
 	}
 
 
